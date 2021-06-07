@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1>CART</h1>
+    </div>
+    <button onclick="submit()">SUBMIT</button>
+    <div id="parent"></div>
+  </body>
+</html>
+
+<script>
+  let data = JSON.parse(localStorage.getItem("cart"));
+  let parent = document.getElementById("parent");
+
+  data.forEach(function (el) {
+    let div = document.createElement("div");
+
+    let price = document.createElement("p");
+    price.innerHTML = `Price: ${el.price}`;
+    let desc = document.createElement("p");
+    desc.innerHTML = `desc: ${el.desc}`;
+    let time = document.createElement("p");
+    time.innerHTML = `time: ${el.top}`;
+
+    let img = document.createElement("img");
+    img.src = el.image;
+
+    div.append(price, desc, time, img);
+    parent.append(div);
+  });
+
+  function submit() {
+    let i = 0;
+    alert("Your order is accepted");
+    setInterval(function () {
+      alert("Your order is being cooked.");
+    }, 3000);
+
+    setInterval(function () {
+      alert("Your order is ready,");
+    }, 11000);
+
+    setInterval(function () {
+      alert("Order out for delivery");
+    }, 21000);
+
+    setInterval(function () {
+      alert("Order delivered");
+    }, 33000);
+  }
+</script>

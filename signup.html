@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="userSignup">
+      Name:<input type="text" id="name" /> Contact Number:<input
+        type="number"
+        id="contact"
+      />
+      Email:<input type="text" id="email" /> Password:<input
+        type="text"
+        id="password"
+      />
+    </form>
+    <div id="button1">
+      <button onclick="submit()">Submit</button>
+    </div>
+    <div id="alreadyuser">Already a user<a></a></div>
+  </body>
+</html>
+<script>
+  function submit() {
+    let form = document.getElementById("userSignup");
+
+    let name = document.getElementById("name").value;
+    let number = document.getElementById("contact").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let userdata = {
+      name,
+      number,
+      email,
+      password,
+    };
+
+    let arr;
+    arr = localStorage.getItem("userdata");
+
+    if (arr == null) {
+      arr = [];
+    } else {
+      arr = JSON.parse(arr);
+    }
+    arr.push(userdata);
+
+    localStorage.setItem("userdata", JSON.stringify(arr));
+  }
+</script>

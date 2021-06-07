@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .topnav {
+        width: 99%;
+        height: 30px;
+        border: 1px solid black;
+      }
+      .topnav button {
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topnav">
+      <button>Menu</button>
+      <button>Signup</button>
+      <button>Login</button>
+    </div>
+    <button onclick="showcart()">Show Cart</button>
+    <div id="parent"></div>
+  </body>
+</html>
+
+<script>
+  const menu = [
+    {
+      price: "100",
+      image:
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/mexican-chicken-burger_1-b5cca6f.jpg?webp=true&quality=90&resize=408%2C370",
+
+      desc: "Hamburger",
+      top: "10",
+    },
+    {
+      price: "150",
+      image:
+        "https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Next-level-caesar-salad-1efacdc.jpg?webp=true&quality=90&resize=408%2C370",
+
+      desc: "Chicken saald",
+      top: "15",
+    },
+    {
+      price: "130",
+      image:
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/apple_and_blackberry_crumble-67a071b.jpg?webp=true&quality=90&resize=408%2C370",
+
+      desc: "Crumble",
+      top: "20",
+    },
+    {
+      price: "70",
+      image:
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/quick-banana-ice-cream-sandwiches-4454968.jpg?webp=true&quality=90&resize=408%2C370",
+
+      desc: "Ice-cream",
+      top: "5",
+    },
+  ];
+
+  if (localStorage.getItem("menu") == null) {
+    localStorage.setItem("menu", JSON.stringify(menu));
+  }
+
+  function showitem() {
+    let data = JSON.parse(localStorage.getItem("menu"));
+
+    let parent = document.getElementById("parent");
+
+    parent.innerHTML = null;
+
+    data.forEach(function (el) {
+      let div = document.createElement("div");
+
+      let price = document.createElement("p");
+      price.innerHTML = `Price: ${el.price}`;
+      let desc = document.createElement("p");
+      desc.innerHTML = `desc: ${el.desc}`;
+      let time = document.createElement("p");
+      time.innerHTML = `time: ${el.top}`;
+
+      let img = document.createElement("img");
+      img.src = el.image;
+
+      let btn = document.createElement("button");
+      btn.textContent = "Add to cart";
+      btn.style.display = "black";
+
+      btn.onclick = function () {
+        additems(el);
+      };
+
+      div.append(price, desc, time, img, btn);
+      parent.append(div);
+    });
+  }
+  showitem();
+
+  function additems(el) {
+    let arr;
+    arr = localStorage.getItem("cart");
+    if (arr == null) {
+      arr = [];
+    } else {
+      arr = JSON.parse(arr);
+    }
+    arr.push(el);
+
+    localStorage.setItem("cart", JSON.stringify(arr));
+  }
+
+  function showcart() {
+    window.location.href = "./cart.html";
+  }
+</script>

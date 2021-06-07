@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .topnav button {
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topnav">
+      <button onclick="menu()">Menu</button>
+      <button onclick="sign()">Signup</button>
+      <button onclick="login()">Login</button>
+    </div>
+    <form id="loginuser">
+      Email:<input type="text" id="email" /> password:<input
+        type="text"
+        id="password"
+      />
+    </form>
+    <button onclick="login(event)">LOGIN</button>
+  </body>
+</html>
+<script>
+  function login(e) {
+    e.preventDefault();
+
+    const form = document.getElementById("loginuser");
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const users = JSON.parse(localStorage.getItem("userdata"));
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email === email && users[i].password === password) {
+        window.location.href = "./menu1.html";
+        break;
+      } else {
+        alert("Invalid Credentials");
+      }
+    }
+  }
+
+  function sign() {
+    window.location.href = "./signup.html";
+  }
+  function menu() {
+    window.location.href = "./menu1.html";
+  }
+</script>
